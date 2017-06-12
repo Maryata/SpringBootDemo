@@ -1,0 +1,13 @@
+# 1st dataSource
+jdbc:
+ driverClassName: com.mysql.jdbc.Driver
+ url: jdbc:mysql://localhost:3306/mytestdb?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8
+ username: root
+ password: 123123
+
+# 2nd dataSource
+jdbc2:
+ driverClassName: com.mysql.jdbc.Driver
+ url: jdbc:mysql://localhost:3306/mytestdb2?zeroDateTimeBehavior=convertToNull&amp;useUnicode=true&amp;characterEncoding=utf-8
+ username: root
+ password: 123123
