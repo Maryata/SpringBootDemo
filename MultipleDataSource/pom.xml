@@ -1,22 +1,22 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
-	<modelVersion>4.0.0</modelVersion>
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
 
-	<groupId>com.example</groupId>
-	<artifactId>multipledatasource</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
+    <groupId>com.example</groupId>
+    <artifactId>multipledatasource</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <packaging>jar</packaging>
 
-	<name>MultipleDataSource</name>
-	<description>Multiple DataSource project for Spring Boot</description>
+    <name>MultipleDataSource</name>
+    <description>Multiple DataSource project for Spring Boot</description>
 
-	<parent>
-		<groupId>org.springframework.boot</groupId>
-		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>1.5.4.RELEASE</version>
-		<relativePath/> <!-- lookup parent from repository -->
-	</parent>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>1.5.4.RELEASE</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -120,6 +120,11 @@
             <artifactId>spring-jdbc</artifactId>
             <version>4.1.1.RELEASE</version>
         </dependency>
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.8.9</version>
+        </dependency>
 
     </dependencies>
 
@@ -128,6 +133,25 @@
             <plugin>
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+
+            <plugin>
+                <groupId>com.spotify</groupId>
+                <artifactId>docker-maven-plugin</artifactId>
+                <version>0.4.13</version>
+                <configuration>
+                    <imageName>${project.artifactId}:${project.version}</imageName><!-- 镜像名称 -->
+                    <dockerDirectory>${basedir}/src/main/docker</dockerDirectory><!-- Dockerfile文件地址 -->
+                    <resources>
+                        <resource>
+                            <!-- <targetPath>/</targetPath> -->
+                            <!-- ${project.build.directory},项目构建输出目录，默认为target/ -->
+                            <directory>${project.build.directory}</directory>
+                            <!-- ${project.build.directory},打包出来的jar名称，默认为${project.artifactId}-${project.version} -->
+                            <include>${project.build.finalName}.jar</include>
+                        </resource>
+                    </resources>
+                </configuration>
             </plugin>
         </plugins>
     </build>
